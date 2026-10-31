@@ -26,6 +26,14 @@ const indonesian = {
   perceptronTitle: "Notebook Perceptron",
   perceptronSummary: "Implementasi perceptron, jaringan saraf paling dasar, langkah demi langkah, mencakup pembaruan bobot dan plot batas keputusan.",
   viewCode: "Lihat kode",
+  demoCaption: "Aplikasi asli dengan data demo buatan.",
+  bacaCaption: "Aplikasi asli, ditampilkan dengan buku domain publik Alice's Adventures in Wonderland.",
+  fruitMatrixCaption: "Confusion matrix InceptionV3 dari notebook. Kesalahan terbanyak adalah apel sehat yang dilabeli busuk.",
+  amplopPlanAlt: "Layar anggaran Amplop di desktop dengan kategori, jumlah yang dialokasikan, dan saldo tersedia.",
+  amplopReportsAlt: "Layar laporan Amplop di ponsel yang membandingkan pemasukan dan pengeluaran per bulan.",
+  bacaLibraryAlt: "Perpustakaan BacaDengar menampilkan buku yang bisa dilanjutkan dengan tombol Baca dan Dengar.",
+  bacaReaderAlt: "Pembaca BacaDengar menampilkan satu bab Alice's Adventures in Wonderland.",
+  fruitMatrixAlt: "Confusion matrix InceptionV3. Sebagian besar prediksi benar; kesalahan utama adalah 116 apel sehat yang dilabeli busuk.",
   skillLangs: "Bahasa pemrograman",
   skillWeb: "Web",
   skillMl: "Machine learning",
@@ -36,12 +44,17 @@ const indonesian = {
 
 const elements = [...document.querySelectorAll("[data-i18n]")];
 const english = new Map(elements.map((el) => [el, el.textContent]));
+const images = [...document.querySelectorAll("[data-i18n-alt]")];
+const englishAlt = new Map(images.map((img) => [img, img.alt]));
 const buttons = [...document.querySelectorAll("[data-lang]")];
 
 function setLanguage(lang) {
   document.documentElement.lang = lang;
   for (const el of elements) {
     el.textContent = lang === "id" ? indonesian[el.dataset.i18n] : english.get(el);
+  }
+  for (const img of images) {
+    img.alt = lang === "id" ? indonesian[img.dataset.i18nAlt] : englishAlt.get(img);
   }
   for (const button of buttons) {
     button.setAttribute("aria-pressed", String(button.dataset.lang === lang));
