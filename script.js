@@ -30,6 +30,7 @@ const indonesian = {
   barsLabel: "Akurasi pada 2.030 gambar validasi",
   copyEmail: "Salin email",
   copied: "Tersalin",
+  emailSelected: "Email dipilih di atas",
   close: "Tutup",
   lightboxLabel: "Gambar yang diperbesar",
   demoCaption: "Aplikasi asli dengan data demo buatan.",
@@ -118,20 +119,40 @@ const copyButton = document.querySelector("#copy-email");
 const copyStatus = document.querySelector("#copy-status");
 let copyTimer;
 
-if (navigator.clipboard) {
-  copyButton.hidden = false;
-  copyButton.addEventListener("click", async () => {
-    await navigator.clipboard.writeText(copyButton.dataset.email);
-    const copied = document.documentElement.lang === "id" ? indonesian.copied : "Copied";
-    copyButton.textContent = copied;
-    copyStatus.textContent = copied;
-    clearTimeout(copyTimer);
-    copyTimer = setTimeout(() => {
-      setLanguage(document.documentElement.lang);
-      copyStatus.textContent = "";
-    }, 2000);
-  });
+async function copyText(text) {
+  try {
+    await navigator.clipboard.writeText(text);
+    return true;
+  } catch {
+    // Browsers can refuse clipboard access, so fall back to the older way.
+    const field = document.createElement("textarea");
+    field.value = text;
+    field.className = "sr-only";
+    document.body.append(field);
+    field.select();
+    const copied = document.execCommand("copy");
+    field.remove();
+    copyButton.focus();
+    return copied;
+  }
 }
+
+copyButton.hidden = false;
+copyButton.addEventListener("click", async () => {
+  const copied = await copyText(copyButton.dataset.email);
+  // If copying is blocked completely, select the address so it's ready to copy by hand.
+  if (!copied) getSelection().selectAllChildren(document.querySelector(".email"));
+  const indonesianText = copied ? indonesian.copied : indonesian.emailSelected;
+  const englishText = copied ? "Copied" : "Email selected above";
+  const message = document.documentElement.lang === "id" ? indonesianText : englishText;
+  copyButton.textContent = message;
+  copyStatus.textContent = message;
+  clearTimeout(copyTimer);
+  copyTimer = setTimeout(() => {
+    setLanguage(document.documentElement.lang);
+    copyStatus.textContent = "";
+  }, copied ? 2000 : 4000);
+});
 
 // Show which section is on screen in the nav.
 const navLinks = [...document.querySelectorAll(".topbar nav a")];
