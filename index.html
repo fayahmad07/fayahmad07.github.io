@@ -9,6 +9,10 @@
   <meta property="og:description" content="Self-hosted apps and machine learning projects. Open to full-time roles.">
   <meta property="og:type" content="website">
   <meta property="og:url" content="https://fayahmad07.github.io/">
+  <meta property="og:image" content="https://fayahmad07.github.io/images/og.jpg">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta name="twitter:card" content="summary_large_image">
   <meta name="color-scheme" content="light dark">
   <link rel="icon" href="favicon.svg" type="image/svg+xml">
   <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -21,7 +25,7 @@
 
   <header class="topbar">
     <a class="brand" href="#top">Ahmad Fayyadh</a>
-    <nav aria-label="Main">
+    <nav aria-label="Main" data-i18n-label="navLabel">
       <a href="#projects" data-i18n="navProjects">Projects</a>
       <a href="#skills" data-i18n="navSkills">Skills</a>
       <a href="#contact" data-i18n="navContact">Contact</a>
@@ -34,7 +38,7 @@
 
   <main id="top">
     <section class="hero">
-      <p class="status"><span class="dot" aria-hidden="true"></span><span data-i18n="status">Open to full-time roles</span></p>
+      <p class="status"><strong class="name">Ahmad Fayyadh</strong><span class="dot" aria-hidden="true"></span><span data-i18n="status">Open to full-time roles</span></p>
       <h1 data-i18n="heroTitle">I build software people can run themselves, and teach machines to see.</h1>
       <p class="lede" data-i18n="heroLede">I'm a student working across full-stack development and machine learning, from phone-ready apps on my own server to image classifiers trained on thousands of photos.</p>
       <div class="actions">
@@ -53,12 +57,12 @@
             <h3>Amplop</h3>
             <span class="tag" data-i18n="private">Private repo</span>
           </div>
-          <p class="summary" data-i18n="amplopSummary">A self-hosted envelope budgeting app: give every rupiah a job before you spend it. It installs on a phone and keeps all its data in a single SQLite file.</p>
           <figure class="shots shots-amplop">
             <a href="images/amplop-plan.webp"><img src="images/amplop-plan.webp" width="1600" height="1000" loading="lazy" alt="Amplop's desktop budget screen with categories, assigned amounts and available balances." data-i18n-alt="amplopPlanAlt"></a>
             <a href="images/amplop-reports.webp"><img src="images/amplop-reports.webp" width="700" height="1050" loading="lazy" alt="Amplop's phone reports screen comparing income and spending by month." data-i18n-alt="amplopReportsAlt"></a>
             <figcaption data-i18n="demoCaption">Real app, made-up demo data.</figcaption>
           </figure>
+          <p class="summary" data-i18n="amplopSummary">A self-hosted envelope budgeting app: give every rupiah a job before you spend it. It installs on a phone and keeps all its data in a single SQLite file.</p>
           <ul>
             <li data-i18n="amplop1">Budgeting with monthly rollover, savings targets, transfers and account reconciliation.</li>
             <li data-i18n="amplop2">CSV import that reads bank and e-wallet statements, suggests column mapping and skips duplicates.</li>
@@ -75,12 +79,12 @@
             <h3>BacaDengar</h3>
             <span class="tag" data-i18n="private">Private repo</span>
           </div>
-          <p class="summary" data-i18n="bacaSummary">Read the ebook, listen to the audiobook, and pick up exactly where you left off in either. The name is Indonesian for "read-listen".</p>
           <figure class="shots shots-baca">
             <a href="images/bacadengar-library.webp"><img src="images/bacadengar-library.webp" width="700" height="847" loading="lazy" alt="BacaDengar's library showing a book to continue with Read and Listen buttons." data-i18n-alt="bacaLibraryAlt"></a>
             <a href="images/bacadengar-reader.webp"><img src="images/bacadengar-reader.webp" width="700" height="847" loading="lazy" alt="BacaDengar's reader showing a chapter of Alice's Adventures in Wonderland." data-i18n-alt="bacaReaderAlt"></a>
             <figcaption data-i18n="bacaCaption">Real app, shown with the public-domain book Alice's Adventures in Wonderland.</figcaption>
           </figure>
+          <p class="summary" data-i18n="bacaSummary">Read the ebook, listen to the audiobook, and pick up exactly where you left off in either. The name is Indonesian for "read-listen".</p>
           <ul>
             <li data-i18n="baca1">Transcribes the audiobook with Whisper and matches every sentence of the book to its time in the audio.</li>
             <li data-i18n="baca2">Custom alignment that anchors on unique four-word sequences and fills the gaps between them.</li>
@@ -95,7 +99,7 @@
         <div class="body">
           <h3 data-i18n="fruitTitle">Fruit Freshness Classification</h3>
           <p class="summary" data-i18n="fruitSummary">Independent research comparing three pre-trained CNNs at telling fresh apples and bananas from rotten ones, using 10,159 images across four classes.</p>
-          <dl class="bars" aria-label="Accuracy on 2,030 validation images">
+          <dl class="bars" aria-label="Accuracy on 2,030 validation images" data-i18n-label="barsLabel">
             <div><dt>InceptionV3</dt><dd><span class="bar best" style="--value: 93%"></span>93%</dd></div>
             <div><dt>VGG16</dt><dd><span class="bar" style="--value: 84%"></span>84%</dd></div>
             <div><dt>ResNet50</dt><dd><span class="bar" style="--value: 54%"></span>54%</dd></div>
@@ -138,10 +142,19 @@
       <h2 id="contact-title" data-i18n="contactTitle">Let's talk</h2>
       <p class="lede" data-i18n="contactText">I'm looking for a full-time role in software or machine learning. Email is the best way to reach me.</p>
       <a class="email" href="mailto:fayahmad07@gmail.com">fayahmad07@gmail.com</a>
+      <div class="actions">
+        <a class="button primary" href="mailto:fayahmad07@gmail.com" data-i18n="ctaEmail">Email me</a>
+        <button class="button" type="button" id="copy-email" data-email="fayahmad07@gmail.com" data-i18n="copyEmail" hidden>Copy email</button>
+      </div>
+      <p class="sr-only" role="status" id="copy-status"></p>
     </section>
   </main>
 
   <footer>© 2026 Ahmad Fayyadh</footer>
+  <dialog class="lightbox" id="lightbox" aria-label="Enlarged image" data-i18n-label="lightboxLabel">
+    <button class="button" type="button" id="lightbox-close" data-i18n="close">Close</button>
+    <img alt="">
+  </dialog>
   <script src="script.js" defer></script>
 </body>
 </html>

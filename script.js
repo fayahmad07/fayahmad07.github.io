@@ -26,6 +26,12 @@ const indonesian = {
   perceptronTitle: "Notebook Perceptron",
   perceptronSummary: "Implementasi perceptron, jaringan saraf paling dasar, langkah demi langkah, mencakup pembaruan bobot dan plot batas keputusan.",
   viewCode: "Lihat kode",
+  navLabel: "Utama",
+  barsLabel: "Akurasi pada 2.030 gambar validasi",
+  copyEmail: "Salin email",
+  copied: "Tersalin",
+  close: "Tutup",
+  lightboxLabel: "Gambar yang diperbesar",
   demoCaption: "Aplikasi asli dengan data demo buatan.",
   bacaCaption: "Aplikasi asli, ditampilkan dengan buku domain publik Alice's Adventures in Wonderland.",
   fruitMatrixCaption: "Confusion matrix InceptionV3 dari notebook. Kesalahan terbanyak adalah apel sehat yang dilabeli busuk.",
@@ -46,6 +52,8 @@ const elements = [...document.querySelectorAll("[data-i18n]")];
 const english = new Map(elements.map((el) => [el, el.textContent]));
 const images = [...document.querySelectorAll("[data-i18n-alt]")];
 const englishAlt = new Map(images.map((img) => [img, img.alt]));
+const labelled = [...document.querySelectorAll("[data-i18n-label]")];
+const englishLabel = new Map(labelled.map((el) => [el, el.getAttribute("aria-label")]));
 const buttons = [...document.querySelectorAll("[data-lang]")];
 
 function setLanguage(lang) {
@@ -55,6 +63,9 @@ function setLanguage(lang) {
   }
   for (const img of images) {
     img.alt = lang === "id" ? indonesian[img.dataset.i18nAlt] : englishAlt.get(img);
+  }
+  for (const el of labelled) {
+    el.setAttribute("aria-label", lang === "id" ? indonesian[el.dataset.i18nLabel] : englishLabel.get(el));
   }
   for (const button of buttons) {
     button.setAttribute("aria-pressed", String(button.dataset.lang === lang));
@@ -82,3 +93,59 @@ for (const button of buttons) {
 
 const preferred = savedLanguage() ?? (navigator.language.startsWith("id") ? "id" : "en");
 if (preferred === "id") setLanguage("id");
+
+// Links keep working as plain image links if this script doesn't run.
+const lightbox = document.querySelector("#lightbox");
+const lightboxImage = lightbox.querySelector("img");
+
+for (const link of document.querySelectorAll(".shots a")) {
+  link.addEventListener("click", (event) => {
+    event.preventDefault();
+    lightboxImage.src = link.href;
+    lightboxImage.alt = link.querySelector("img").alt;
+    lightbox.showModal();
+  });
+}
+
+document.querySelector("#lightbox-close").addEventListener("click", () => lightbox.close());
+lightbox.addEventListener("click", (event) => {
+  if (event.target === lightbox) lightbox.close();
+});
+lightbox.addEventListener("close", () => lightboxImage.removeAttribute("src"));
+
+// mailto does nothing on a computer with no mail app, so offer copying too.
+const copyButton = document.querySelector("#copy-email");
+const copyStatus = document.querySelector("#copy-status");
+let copyTimer;
+
+if (navigator.clipboard) {
+  copyButton.hidden = false;
+  copyButton.addEventListener("click", async () => {
+    await navigator.clipboard.writeText(copyButton.dataset.email);
+    const copied = document.documentElement.lang === "id" ? indonesian.copied : "Copied";
+    copyButton.textContent = copied;
+    copyStatus.textContent = copied;
+    clearTimeout(copyTimer);
+    copyTimer = setTimeout(() => {
+      setLanguage(document.documentElement.lang);
+      copyStatus.textContent = "";
+    }, 2000);
+  });
+}
+
+// Show which section is on screen in the nav.
+const navLinks = [...document.querySelectorAll(".topbar nav a")];
+const sections = navLinks.map((link) => document.querySelector(link.hash));
+
+function markCurrentSection() {
+  const atBottom = innerHeight + scrollY >= document.documentElement.scrollHeight - 2;
+  const passed = sections.filter((section) => section.getBoundingClientRect().top <= innerHeight * 0.4);
+  const current = atBottom ? sections.at(-1) : passed.at(-1);
+  navLinks.forEach((link, i) => {
+    if (sections[i] === current) link.setAttribute("aria-current", "true");
+    else link.removeAttribute("aria-current");
+  });
+}
+
+addEventListener("scroll", markCurrentSection, { passive: true });
+markCurrentSection();
