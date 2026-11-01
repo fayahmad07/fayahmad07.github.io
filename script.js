@@ -3,10 +3,47 @@ const indonesian = {
   skip: "Langsung ke proyek",
   navProjects: "Proyek",
   navSkills: "Keahlian",
+  navAbout: "Tentang",
+  navExperience: "Pengalaman",
+  roleLine: "ML / Riset",
+  word: "Portofolio",
+  subrole: "M.Si. Sains Komputasi, ITB",
+  stat1: "Proyek di sini",
+  stat2: "IPK di ITB",
+  stat3: "Mahasiswa dibantu",
+  portraitAlt: "Potret Ahmad Fayyadh mengenakan toga wisuda, menatap kamera dari tangga yang tersinari matahari.",
+  doTitle: "Yang saya kerjakan",
+  do1Title: "Aplikasi full-stack",
+  do1Text: "Front end React dan TypeScript, back end Node.js atau FastAPI, dikemas dengan Docker agar berjalan di server sendiri.",
+  do2Title: "Machine learning",
+  do2Text: "Riset deep learning pada citra medis dan makanan, serta penyelarasan suara dan teks di dalam aplikasi nyata.",
+  do3Title: "Pengajaran + riset",
+  do3Text: "Mengasisteni mata kuliah ML dan AI, memberi kuliah, membimbing kelompok proyek, dan memublikasikan riset.",
+  aboutText: "Saya menikmati pekerjaan yang mempertemukan riset, pengajaran, dan pembuatan produk. Di ITB saya berfokus pada deep learning untuk citra medis dan membantu mahasiswa menyelesaikan proyek ML mereka. Di luar riset, saya membuat alat sendiri: aplikasi anggaran, pembaca audiobook, dan catatan gym.",
+  mlaTitle: "Asisten Machine Learning & Advanced ML",
+  mlaText: "Menilai tugas dan mengawasi ujian, memberi kuliah Neural Network, serta membimbing 15 mahasiswa dalam 4 kelompok menyelesaikan proyek akhir ML selama 2 semester.",
+  aiaTitle: "Asisten Data Science / AI",
+  aiaText: "Membantu menyampaikan mata kuliah AI dan Data Science selama 14 minggu kepada 500+ mahasiswa dari 4 fakultas, mencakup dasar ML, prapemrosesan data, dan evaluasi model.",
+  staffTitle: "Staf Mahasiswa, FMIPA",
+  staffText: "Melakukan scraping dan klasifikasi 5.000+ judul riset dari 200+ dosen berdasarkan peringkat Scopus dan Sinta, serta mengoordinasikan 200+ peserta acara Peneliti Belia Jawa Barat.",
+  igscTitle: "Kepala Dokumentasi & Publikasi",
+  igscText: "Memimpin tim 3 orang, membuat semua aset visual, serta mengotomatiskan sertifikat dan email untuk 150+ peserta, termasuk peserta internasional.",
+  cirebonTitle: "Pengabdian Masyarakat, Cirebon",
+  cirebonText: "Memimpin dokumentasi dan publikasi serta mendesain semua materi visual untuk program pelatihan guru IPA sekolah dasar.",
+  eduTitle: "Pendidikan",
+  msTitle: "M.Si. Sains Komputasi",
+  msText: "IPK 3,98/4,00. Tugas akhir: klasifikasi penyakit kardiovaskular dengan hybrid deep learning pada citra EKG.",
+  bsTitle: "S.Kom. Ilmu Komputer",
+  bsText: "IPK 3,78/4,00. Tugas akhir: transfer learning VGG16 dan VGG19 untuk klasifikasi tumor otak dari citra MRI.",
+  pubTitle: "Publikasi",
+  pubText: "Prosiding: Impact of Preprocessing Techniques on Cardiovascular Disease Prediction Using Electrocardiogram Images.",
+  certTitle: "Sertifikasi",
+  skillSpoken: "Bahasa",
+  skillSpokenList: "Bahasa Indonesia (penutur asli), Inggris (mahir)",
   navContact: "Kontak",
-  status: "Terbuka untuk pekerjaan penuh waktu",
+  status: "Terbuka untuk peran dosen + riset",
   heroTitle: "Saya membuat software yang bisa dijalankan sendiri, dan melatih mesin untuk melihat.",
-  heroLede: "Saya mahasiswa yang menekuni pengembangan full-stack dan machine learning, dari aplikasi siap pakai di ponsel yang berjalan di server sendiri hingga pengklasifikasi gambar yang dilatih dengan ribuan foto.",
+  heroLede: "Saya lulusan magister Institut Teknologi Bandung yang menekuni machine learning dan pengembangan full-stack, dari riset deep learning pada citra EKG hingga aplikasi yang berjalan di server sendiri.",
   ctaProjects: "Lihat proyek saya",
   ctaEmail: "Kirim email",
   private: "Repo privat",
@@ -52,27 +89,27 @@ const indonesian = {
   skillMl: "Machine learning",
   skillOps: "Peralatan",
   contactTitle: "Mari berbincang",
-  contactText: "Saya sedang mencari pekerjaan penuh waktu di bidang software atau machine learning. Email adalah cara terbaik untuk menghubungi saya.",
+  contactText: "Saya sedang mencari posisi dosen atau peneliti, atau pekerjaan di bidang data science dan machine learning. Email adalah cara terbaik untuk menghubungi saya.",
 };
 
-const elements = [...document.querySelectorAll("[data-i18n]")];
-const english = new Map(elements.map((el) => [el, el.textContent]));
-const images = [...document.querySelectorAll("[data-i18n-alt]")];
-const englishAlt = new Map(images.map((img) => [img, img.alt]));
-const labelled = [...document.querySelectorAll("[data-i18n-label]")];
-const englishLabel = new Map(labelled.map((el) => [el, el.getAttribute("aria-label")]));
+const translated = [
+  ["data-i18n", "textContent"],
+  ["data-i18n-alt", "alt"],
+  ["data-i18n-label", "ariaLabel"],
+].flatMap(([attribute, property]) =>
+  [...document.querySelectorAll(`[${attribute}]`)].map((el) => ({
+    el,
+    property,
+    key: el.getAttribute(attribute),
+    english: el[property],
+  })),
+);
 const buttons = [...document.querySelectorAll("[data-lang]")];
 
 function setLanguage(lang) {
   document.documentElement.lang = lang;
-  for (const el of elements) {
-    el.textContent = lang === "id" ? indonesian[el.dataset.i18n] : english.get(el);
-  }
-  for (const img of images) {
-    img.alt = lang === "id" ? indonesian[img.dataset.i18nAlt] : englishAlt.get(img);
-  }
-  for (const el of labelled) {
-    el.setAttribute("aria-label", lang === "id" ? indonesian[el.dataset.i18nLabel] : englishLabel.get(el));
+  for (const { el, property, key, english } of translated) {
+    el[property] = lang === "id" ? indonesian[key] : english;
   }
   for (const button of buttons) {
     button.setAttribute("aria-pressed", String(button.dataset.lang === lang));
