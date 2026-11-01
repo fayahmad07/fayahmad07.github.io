@@ -59,7 +59,7 @@
           </div>
           <figure class="shots shots-amplop">
             <a href="images/amplop-plan.webp"><img src="images/amplop-plan.webp" width="1600" height="1000" loading="lazy" alt="Amplop's desktop budget screen with categories, assigned amounts and available balances." data-i18n-alt="amplopPlanAlt"></a>
-            <a href="images/amplop-reports.webp"><img src="images/amplop-reports.webp" width="700" height="1050" loading="lazy" alt="Amplop's phone reports screen comparing income and spending by month." data-i18n-alt="amplopReportsAlt"></a>
+            <a href="images/amplop-home.webp"><img src="images/amplop-home.webp" width="700" height="1050" loading="lazy" alt="Amplop's phone home screen with total balance, quick actions, the month's budget and recent transactions." data-i18n-alt="amplopHomeAlt"></a>
             <figcaption data-i18n="demoCaption">Real app, made-up demo data.</figcaption>
           </figure>
           <p class="summary" data-i18n="amplopSummary">A self-hosted envelope budgeting app: give every rupiah a job before you spend it. It installs on a phone and keeps all its data in a single SQLite file.</p>
@@ -80,7 +80,7 @@
             <span class="tag" data-i18n="private">Private repo</span>
           </div>
           <figure class="shots shots-baca">
-            <a href="images/bacadengar-library.webp"><img src="images/bacadengar-library.webp" width="700" height="847" loading="lazy" alt="BacaDengar's library showing a book to continue with Read and Listen buttons." data-i18n-alt="bacaLibraryAlt"></a>
+            <a href="images/bacadengar-library.webp"><img src="images/bacadengar-library.webp" width="700" height="847" loading="lazy" alt="BacaDengar's home screen with a book cover carousel and shelf filters." data-i18n-alt="bacaLibraryAlt"></a>
             <a href="images/bacadengar-reader.webp"><img src="images/bacadengar-reader.webp" width="700" height="847" loading="lazy" alt="BacaDengar's reader showing a chapter of Alice's Adventures in Wonderland." data-i18n-alt="bacaReaderAlt"></a>
             <figcaption data-i18n="bacaCaption">Real app, shown with the public-domain book Alice's Adventures in Wonderland.</figcaption>
           </figure>
@@ -96,6 +96,28 @@
 
       <article class="project">
         <p class="index" aria-hidden="true">03</p>
+        <div class="body">
+          <div class="title-row">
+            <h3>Angkat</h3>
+            <span class="tag" data-i18n="private">Private repo</span>
+          </div>
+          <figure class="shots shots-baca">
+            <a href="images/angkat-home.webp"><img src="images/angkat-home.webp" width="700" height="847" loading="lazy" alt="Angkat's home screen with today's progress ring, weekly activity and quick actions." data-i18n-alt="angkatHomeAlt"></a>
+            <a href="images/angkat-nutrition.webp"><img src="images/angkat-nutrition.webp" width="700" height="847" loading="lazy" alt="Angkat's nutrition screen with calories, macros, water and logged meals." data-i18n-alt="angkatNutritionAlt"></a>
+            <figcaption data-i18n="demoCaption">Real app, made-up demo data.</figcaption>
+          </figure>
+          <p class="summary" data-i18n="angkatSummary">A personal gym log for workouts, programs, progress and nutrition. The name is Indonesian for "lift". It's an installable phone app that keeps working with no connection.</p>
+          <ul>
+            <li data-i18n="angkat1">Offline-first: every entry saves on the phone, then syncs to the server when a connection returns.</li>
+            <li data-i18n="angkat2">When two devices edit the same workout, the changes are merged set by set instead of one overwriting the other.</li>
+            <li data-i18n="angkat3">A library of 870+ exercises with demo photos and muscle maps, plus optional food-photo analysis with Gemini.</li>
+          </ul>
+          <p class="stack">React · TypeScript · IndexedDB · Node.js · Express · SQLite · Gemini API · Docker</p>
+        </div>
+      </article>
+
+      <article class="project">
+        <p class="index" aria-hidden="true">04</p>
         <div class="body">
           <h3 data-i18n="fruitTitle">Fruit Freshness Classification</h3>
           <p class="summary" data-i18n="fruitSummary">Independent research comparing three pre-trained CNNs at telling fresh apples and bananas from rotten ones, using 10,159 images across four classes.</p>
@@ -118,7 +140,7 @@
       </article>
 
       <article class="project">
-        <p class="index" aria-hidden="true">04</p>
+        <p class="index" aria-hidden="true">05</p>
         <div class="body">
           <h3 data-i18n="perceptronTitle">Perceptron Notebook</h3>
           <p class="summary" data-i18n="perceptronSummary">A step-by-step implementation of the perceptron, the most basic neural network, covering weight updates and a plotted decision boundary.</p>
@@ -132,8 +154,8 @@
       <h2 id="skills-title" data-i18n="navSkills">Skills</h2>
       <dl class="skills">
         <div><dt data-i18n="skillLangs">Languages</dt><dd>TypeScript, JavaScript, Python, SQL, HTML, CSS</dd></div>
-        <div><dt data-i18n="skillWeb">Web</dt><dd>React, Vite, Node.js, Express, PWA</dd></div>
-        <div><dt data-i18n="skillMl">Machine learning</dt><dd>TensorFlow, Keras, CNNs, faster-whisper, NumPy</dd></div>
+        <div><dt data-i18n="skillWeb">Web</dt><dd>React, Vite, Node.js, Express, FastAPI, IndexedDB, PWA</dd></div>
+        <div><dt data-i18n="skillMl">Machine learning</dt><dd>TensorFlow, Keras, CNNs, faster-whisper, Gemini API, NumPy</dd></div>
         <div><dt data-i18n="skillOps">Tools</dt><dd>Docker, Docker Compose, SQLite, Git, Linux</dd></div>
       </dl>
     </section>
